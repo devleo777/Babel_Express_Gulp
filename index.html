@@ -1,0 +1,221 @@
+<div class='tablecontainer divtablecontainer'
+    style="overflow-y:scroll;height: calc(100vh - (70px));position: relative;display:block;">
+    <table id="tablecontainer" class="">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="modal" id="modalEDIT" style="background-color:rgba(255, 255, 255, 0.0);" data-easein="">
+    <div class="modal-dialog modal-dialog-ease modal-lg "
+        style="top:20%;position: relative;max-width:440px;mix-width:440px;">
+        <div class="modal-content modal-content-dragabble" style="border:solid white 5px;background:white;">
+
+            <!-- Modal Header -->
+            <div class="modal-header"
+                style="background-color:white;color:#1976d2;border-top-left-radius: 0;border-top-right-radius: 0;padding:7px;">
+                <h5 class="modal-title">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"
+                        style="color:gray;font-size:20px;"></i></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" style="padding:0;background:white;">
+                <input type="hidden" id="hdnSEQUENCE">
+
+                <div class="container">
+                    <form id="formED">
+                        <div class="row" style="margin-top:5px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">ID
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" name="edID" id="edID"
+                                    style="font-size:12px;width:100px;" autocomplete="off" placeholder="" required
+                                    disabled>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">Task
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" id="edTASK" name="edTASK"
+                                    style="font-size:12px;" autocomplete="off" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">Description
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" id="edDESCRIPTION" name="edDESCRIPTION"
+                                    style="font-size:12px;" autocomplete="off" placeholder="" required>
+                            </div>
+
+
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">Author
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" id="edAUTHOR" name="edAUTHOR"
+                                    style="font-size:12px;" autocomplete="off" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;margin-bottom:10px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">Status
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman"></span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <div class="container">
+                                    <div class="row" style="padding:0;">
+                                        <div class="col-2"
+                                            style="padding:0;text-align:center;vertical-align:middle;margin:auto;">
+                                            <input type="radio" name="rdbedFLAG" id="rdbedFLAGOPEN" value="1"
+                                                style="width:20px;height:20px;margin:auto;vertical-align:middle;">
+                                        </div>
+                                        <div class="col-2"
+                                            style="padding:0;margin:auto;vertical-align:middle;text-align:left;">
+                                            <label for="rdbedFLAGOPEN"
+                                                style="font-size:13px;padding:0;margin:auto;vertical-align:middle;">Open</label>
+                                        </div>
+                                        <div class="col-2"
+                                            style="padding:0;text-align:center;vertical-align:middle;margin:auto;">
+                                            <input type="radio" name="rdbedFLAG" id="rdbedFLAGCLOSE" value="0"
+                                                style="width:20px;height:20px;margin:auto;vertical-align:middle;">
+                                        </div>
+                                        <div class="col-6"
+                                            style="padding:0;margin:auto;vertical-align:middle;text-align:left;">
+                                            <label for="rdbedFLAGCLOSE"
+                                                style="font-size:13px;padding:0;margin:auto;vertical-align:middle;">Close</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger" id="btnedSave"
+                            style="width:120px;font-size:13px;border-radius:5px;float:right;"><i
+                                class="fas fa-save"></i>&nbsp;&nbsp;Save</button>
+                    </form>
+                </div>
+
+
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer" style="padding:5px;background:white;border:none;">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modalADD" style="background-color:rgba(255, 255, 255, 0.0);" data-easein="">
+    <div class="modal-dialog modal-dialog-ease modal-lg "
+        style="top:20%;position: relative;max-width:440px;mix-width:440px;">
+        <div class="modal-content modal-content-dragabble" style="border:solid white 5px;background:white;">
+
+            <!-- Modal Header -->
+            <div class="modal-header"
+                style="background-color:white;color:#1976d2;border-top-left-radius: 0;border-top-right-radius: 0;padding:7px;">
+                <h5 class="modal-title">Add</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"
+                        style="color:gray;font-size:20px;"></i></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" style="padding:0;background:white;">
+                <div class="container">
+                    <form id="formADD">
+                        <div class="row" style="margin-top:5px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">ID
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" id="addID" name="addID"
+                                    style="font-size:12px;width:100px;" autocomplete="off" placeholder="" disabled>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">Task
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" id="addTASK" name="addTASK"
+                                    style="font-size:12px;" autocomplete="off" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">Description
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" id="addDESCRIPTION" name="addDESCRIPTION"
+                                    style="font-size:12px;" autocomplete="off" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;margin-bottom:10px;">
+                            <div class="col-3" style="padding:0;margin:auto;vertical-align:middle;text-align:right;">
+                                <label
+                                    style="font-size:13px;font-weight:700;padding:0;margin:auto;vertical-align:middle;">Author
+                                    <span style="color:red;font-size:14px;font-family:Times New Roman">*</span> :
+                                    &nbsp;</label>
+                            </div>
+                            <div class="col-9" style="padding:0;">
+                                <input type="text" class="form-control" id="addAUTHOR" name="addAUTHOR"
+                                    style="font-size:12px;" autocomplete="off" placeholder="">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger" id="btnaddSAVE"
+                            style="width:120px;font-size:13px;border-radius:5px;float:right;"><i
+                                class="fas fa-plus"></i>&nbsp;&nbsp;Add</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer" style="padding:5px;background:white;border:none;">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<form method="POST" id="formCSVDATA" style="display:none;">
+    <textarea id="csvData" name="csvData"></textarea>
+</form>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Title -->
+
+		<title>Tasks by Jmfcool.com</title>
+
+		<!-- End of Title -->
+		<!-- Meta -->
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Expires" CONTENT="0">
+		<meta http-equiv="Cache-Control" CONTENT="no-cache">
+		<meta http-equiv="Pragma" CONTENT="no-cache">
+
+		<!-- End of Meta -->
+		<!-- Stylesheet -->
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+		<link rel="stylesheet" href="build/release.min.css">
+
+		<!-- End of Stylesheet -->
+
+		<script>var user = {isLoggedIn: <%= Boolean(locals.user) %>, userId: "<%= locals.user?.sid %>"}</script>
+	</head>
+	<body>
+		<header>
+			<div class="left_buttons">
+				<ul>
+					<li class="nav-item active">
+						<% if (locals.user) { %>
+							<a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+						<% } else { %>
+							<a href="/login">Login</a>
+						<% } %>
+					</li>
+					<li>
+						<a href="javascript:void(0)" data-target="#contactForm" data-toggle="modal" class="contact bs-tooltip form" title="Support"><i class="fas fa-headset"></i> Support</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" id="btnADD" class="new_item bs-tooltip" data-placement="top" title="Add item"><i class="fas fa-plus"></i> New Item</a>
+					</li>
+				</ul>
+			</div>
+			<div class="filter_search_wrap">
+				<div class="inner_wrap">
+					<div class="filter_search">
+						<div class="filter_wrap">
+							<div class="select_field">
+								<select class="form-control" id="selFLAG">
+									<option value="2">All</option>
+									<option value="1">Open</option>
+									<option value="3">Started</option>
+									<option value="0">Close</option>
+								</select>&nbsp;
+							</div>
+						</div>
+						<div class="search_wrap">
+							<div class="search_box">
+								<input type="text" class="form-control" id="search" style="font-size:14px;" placeholder="Search" autocomplete="off">
+								<button class="btn btn-info btn-danger" id="button"> <i class="fas fa-search"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>

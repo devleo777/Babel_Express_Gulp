@@ -1,0 +1,17 @@
+[
+    {
+        "name": "terms",
+        "title": "Terms of Use",
+        "link": "/terms.html"
+    },
+    {
+        "name": "privacy",
+        "title": "Privacy Policy",
+        "link": "/privacy.html"
+    },
+    {
+        "name": "knowledge",
+        "title": "Knowledge Base",
+        "link": "/knowledge.html"
+    }
+]

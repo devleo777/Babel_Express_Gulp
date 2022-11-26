@@ -1,0 +1,312 @@
+<%- include('partials/header') -%>
+
+<!-- <% if (locals.isAuthenticated) { %>
+    <p>You are logged in. <a href="/profile" class="underline">View your profile</a>.</p>
+<% } else { %>
+    <p>You are not logged in. <a href="/login" class="underline">Login</a>.</p>
+<% } %> -->
+
+<div class="tasks">
+    <div class="table-responsive">
+        <table id="table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="task_id">
+                        <span>ID</span>
+                    </th>
+                    <th class="task_name">
+                        <span>Task</span>
+                    </th>
+                    <th class="task_description">
+                        <span>Description</span>
+                    </th>
+                    <th class="task_author">
+                        <span>Author</span>
+                    </th>
+                    <th class="task_status">
+                        <span>Status</span>
+                    </th>
+                    <th class="task_action">
+                        <span>Action</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/x-handlebars" id="tasks-tmpl">
+    {{#each tasks}}
+    <tr class="bs-row" id={{_id}}>
+        {{#if record}}
+        <td class="record">{{record}}</td>
+        {{else}}
+        <td class="record">{{increment @index}}</td>
+        {{/if}}
+        <td class="task">{{task}}</td>
+        <td class="description">{{description}}
+            {{#if filename}}
+            <a href="/download?id={{_id}}" target="_blank"><i class="fas fa-download"></i></a>
+            <a href="#" class="delete-file"><i class="fas fa-trash"></i></a>
+            {{/if}}
+        </td>
+        <td><a href="#" class="rowEDIT author" data-toggle="modal" data-target="#modalEDIT" data-backdrop="true">{{author}}</a></td>
+        <td data-toggle="tooltip" title="Switch Status">
+            <a href="#" class="rowEDIT" data-toggle="modal" data-target="#modalEDIT" data-backdrop="true">
+                {{#if_eq status '0'}}
+                <span class="status_badge status_close" title="Edit">Closed</span>
+                {{/if_eq}}
+                {{#if_eq status '1'}}
+                <span class="status_badge status_open" title="Edit">Opened</span>
+                {{/if_eq}}
+                {{#if_eq status '3'}}
+                <span class="status_badge status_started" title="Edit">Started</span>
+                {{/if_eq}}
+            </a>
+        </td>
+        <td class="actions">
+            <ul>
+                <li data-toggle="tooltip" data-placement="top" title="Upload"><a href="#" class="rowUPLOAD" data-toggle="modal" data-target="#modalUPLOAD" data-backdrop="true"><i class="fas fa-upload"></i></a></li>
+			    <li data-toggle="tooltip" data-placement="top" title="Edit"><a href="#" class="rowEDIT" data-toggle="modal" data-target="#modalEDIT" data-backdrop="true"><i class="fas fa-edit"></i></a></li>
+				<li data-toggle="tooltip" data-placement="top" title="Delete"><a href="#" class="rowDELETE"><i class="fas fa-trash"></i></a></li>
+			</ul>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<div class="modal fade" id="modalEDIT" data-easein=""">
+    <div class="modal-dialog modal-dialog-ease modal-lg ">
+        <div class="modal-content modal-content-dragabble">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="hdnSEQUENCE">
+
+                <div class="container">
+                    <form id="formED">
+                        <div class="row">
+                            <div class="col-3">
+                                <label>ID <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" name="edID" id="edID" autocomplete="off" placeholder="" required disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Task <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control required" id="edTASK" name="edTASK" autocomplete="off" placeholder="">
+                                <div class="message">Task must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Description <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <textarea name="edDESCRIPTION" id="edDESCRIPTION" class="form-control required" autocomplete="off" placeholder=""></textarea>
+                                <div class="message">Description must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Author <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control required" id="edAUTHOR" name="edAUTHOR" autocomplete="off" placeholder="">
+                                <div class="message">Author must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Status <span></span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <input type="radio" name="rdbedFLAG" id="rdbedFLAGOPEN" value="1">
+                                            <label for="rdbedFLAGOPEN">Open</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="radio" name="rdbedFLAG" id="rdbedFLAGSTARTED" value="3">
+                                            <label for="rdbedFLAGSTARTED">Started</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="radio" name="rdbedFLAG" id="rdbedFLAGCLOSE" value="0">
+                                            <label for="rdbedFLAGCLOSE">Close</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn" id="btnedSave"><i class="fas fa-save"></i>&nbsp;&nbsp;Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalADD" data-easein="">
+    <div class="modal-dialog modal-dialog-ease modal-lg">
+        <div class="modal-content modal-content-dragabble">
+            <div class="modal-header">
+                <h5 class="modal-title">Add</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form id="formADD">
+                        <div class="row">
+                            <div class="col-3">
+                                <label>ID <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="addID" name="addID" autocomplete="off" placeholder="" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Task <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control required" id="addTASK" name="addTASK" autocomplete="off" placeholder="">
+                                <div class="message">Task must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Description <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <textarea name="addDESCRIPTION" id="addDESCRIPTION" class="form-control required" autocomplete="off" placeholder=""></textarea>
+                                <div class="message">Description must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Author<span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control required" id="addAUTHOR" name="addAUTHOR" autocomplete="off" placeholder="">
+                                <div class="message">Author must not be blank</div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger" id="btnaddSAVE"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalUPLOAD" data-easein="">
+    <div class="modal-dialog modal-dialog-ease modal-lg">
+        <div class="modal-content modal-content-dragabble">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form class="formUPLOAD" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-3">
+                                <label>ID <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="uploadID" autocomplete="off" placeholder="" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Upload <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="file" class="form-control required" id="uploadFILE" name="uploadFile" autocomplete="off" placeholder="">
+                                <div class="message">File must not be blank</div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger" id="btnSAVE"><i class="fas fa-upload"></i>&nbsp;&nbsp;Upload</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<form method="POST" id="formCSVDATA" style="display:none;">
+    <textarea id="csvData" name="csvData"></textarea>
+</form>
+
+<!-- Contact Form -->
+
+<div class="modal fade contact-form" id="contactForm">
+    <div class="modal-dialog modal-dialog-ease modal-lg">
+        <div class="modal-content modal-content-dragabble">
+            <div class="modal-header">
+                <h5 class="modal-title">Support</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form id="contact" method="post" novalidate>
+                        <input type="hidden" name="site" value="Tasks by Jmfcool.com">
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Subject <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" name="subject" class="form-control" value="Support" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Name <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" name="name" id="name" class="form-control required" autocomplete="off" placeholder="">
+                                <div class="message">Name must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Email <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="email" name="address" id="address" class="form-control email required" autocomplete="off" placeholder="">
+                                <div class="message">Email must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label>Comment <span>*</span> : &nbsp;</label>
+                            </div>
+                            <div class="col-9">
+                                <textarea name="body" id="body" class="form-control required" autocomplete="off" placeholder=""></textarea>
+                                <div class="message">Comment must not be blank</div>
+                            </div>
+                        </div>
+                        <div class="response" style="display:none"></div>
+                        <button type="button" name="submit" class="button btn submit"><i class="fas fa-headset"></i> Support</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!-- End of Contact Form -->
+
+<%- include('partials/footer') -%>

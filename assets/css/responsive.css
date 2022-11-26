@@ -1,0 +1,172 @@
+/* Default Layout	*/
+
+
+/*	Extra small devices (portrait phones, less than 576px)	*/
+@media (max-width: 575.98px) {
+	
+	header {
+		-ms-grid-columns: auto;
+		grid-template-columns: auto;
+		gap: 10px;
+		padding-top: 10px;
+	}
+	header .left_buttons ul{
+		text-align: center;
+	}
+	header .left_buttons ul li{
+		width: calc(33.33% - 6.67px);
+	}
+	header .left_buttons ul li:last-child{
+		margin-right: 0px;
+	}
+	header .left_buttons ul li a{
+		display: block;
+		min-width: 100%;
+		padding: 7.5px 10px;
+	}
+
+	header .filter_search .form-control
+	{
+		font-size: 14px;
+		padding: 8px 15px;
+		height: 36px;
+	}
+	header .filter_search .select_field select{
+		padding: 8px 5px;
+		height: 36px;
+	}
+	header .filter_search .search_box .btn {
+		width: 32px;
+		height: 32px;
+		font-size: 12px;
+	}
+
+	header .filter_search {
+		-ms-grid-columns: 90px 10px 1fr;
+		grid-template-columns: 90px 1fr;
+		gap: 10px;
+		max-width: 100%;
+	}
+
+	.tasks {
+		padding: 10px;
+		padding-top: 15px;
+	}
+	.tasks th,
+	.tasks td{
+		font-size: 13px;
+		padding: 7.5px;
+	}
+
+
+	.tasks .task_name span{
+		width: 90px;
+		display: inline-block;
+	}
+	.tasks .task_author span{
+		width: 90px;
+		display: inline-block;
+	}
+	.tasks .task_description span {
+		width: 120px;
+		display: inline-block;
+	}
+
+	/* task_action */
+
+	.tasks td:nth-of-type(6) ul
+	{
+		width: 80px;
+	}
+	.tasks td:nth-of-type(6) ul li 
+	{
+		margin-right: 15px;
+	}
+
+	/* End of task_action */
+	/* Modal */
+
+	.modal .modal-dialog
+	{
+		max-width: 100%;
+	}
+	
+	/* End of Modal */
+	
+}
+
+/*	Small devices (landscape phones, 576px and up)	*/
+@media (min-width: 576px) and (max-width: 767.98px) {
+	
+	header {
+		-ms-grid-columns: auto;
+		grid-template-columns: auto;
+		gap: 15px;
+		padding-top: 10px;
+	}
+	header .left_buttons ul{
+		text-align: center;
+	}
+	header .filter_search {
+		-ms-grid-columns: 120px 10px 1fr;
+		grid-template-columns: 120px 1fr;
+		gap: 10px;
+		max-width: 100%;
+	}
+
+	.tasks {
+		padding: 10px;
+		padding-top: 15px;
+	}
+	.tasks th,
+	.tasks td{
+		font-size: 14px;
+	}
+
+	.tasks .task_name{
+		width: 120px;
+	}
+	.tasks .task_name{
+		width: 120px;
+	}
+	.tasks .task_description {
+		width: 175px;
+	}
+
+	/* task_action */
+
+	.tasks td:nth-of-type(6) {
+		width: 90px;
+	}
+	.tasks td:nth-of-type(6) ul li {
+		margin-right: 15px;
+	}
+
+	/* End of task_action */
+	/* Modal */
+
+	.modal .modal-dialog
+	{
+		max-width: 100%;
+	}
+
+	/* End of Modal */
+	
+}
+
+/*	Medium devices (tablets, 768px and up)	*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+	
+	header .left_buttons ul li a {
+		padding: 10.5px 10px;
+		min-width: inherit;
+	}
+	
+}
+
+/*	Large devices (desktops, 992px and up)	*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+	
+
+	
+}
